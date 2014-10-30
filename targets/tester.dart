@@ -15,7 +15,7 @@ main(List<String> args){
     if(args.length==0)runTests();
     else if(args[0]=="submit"){
         print(Tests.owner+":"+Tests.id);
-        for(String file in Tests.file){
+        for(String file in Tests.files){
             print(file);
         }
     }
