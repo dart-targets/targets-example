@@ -13,7 +13,7 @@ import 'tests.dart' as Tests;
 
 main(List<String> args){
     if(args.length==0)runTests();
-    else if(args[0]=="submit")
+    else if(args[0]=="submit");
 }
 
 void runTests(){
