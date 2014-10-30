@@ -11,8 +11,9 @@
 import 'dart:io';
 import 'tests.dart' as Tests;
 
-main(){
-    runTests();
+main(List<String> args){
+    if(args.length==0)runTests();
+    else if(args[0]=="submit")
 }
 
 void runTests(){
@@ -83,7 +84,7 @@ const String RED = "red";
 const String BLUE = "blue";
 
 Function print = (String str, [String type=PLAIN]){
-    if(type==PLAIN){
+    if(type==PLAIN||Platform.isWindows){
         stdout.writeln(str);
     }else if(type==RED){
         stdout.writeln("\u001b[0;31m"+str+"\u001b[0;0m");
