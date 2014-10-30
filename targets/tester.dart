@@ -13,7 +13,12 @@ import 'tests.dart' as Tests;
 
 main(List<String> args){
     if(args.length==0)runTests();
-    else if(args[0]=="submit");
+    else if(args[0]=="submit"){
+        print(Tests.owner+":"+Tests.id);
+        for(String file in Tests.file){
+            print(file);
+        }
+    }
 }
 
 void runTests(){
