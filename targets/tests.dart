@@ -9,7 +9,7 @@
 // Your instructor may run additional tests on your code after you submit it.
 // Test results based on this file are not shared with your instructor,
 // so changing it will not help your grade. If this file becomes corrupted,
-// you may redownload it by running "targets refresh"
+// you will have to redownload the assigment template.
 
 /// Import necessary files here, probably with a prefix, e.g.
 import '../example.dart' as Example;
