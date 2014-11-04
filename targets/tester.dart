@@ -1,15 +1,10 @@
-/// This file is executed by targets in order to test student code.
-/// Changes to this file will not be shared with students as
-/// targets will insert its own version of this file,
-/// not the one included in your GitHub repository.
-/// 
-/// Message displayed to students:
 // targets uses this file to test your code
 // Changing it will not improve your grade
 // It will only make it harder for you to run tests
 
 import 'dart:io';
 import 'tests.dart' as Tests;
+import 'helpers.dart';
 
 main(List<String> args){
     if(args.length==0)runTests();
@@ -38,6 +33,7 @@ void runTests(){
             var s = 0;
             try{
                 s = t.test();
+                if(s==null)s=0;
             }catch(e){
                 String error = e.toString().replaceAll("\n"," ");
                 print("Test ${t.name} failed with error: $error", RED);
@@ -57,6 +53,7 @@ void runTests(){
             bool result = false;
             try{
                 result = t.test();
+                if(result==null)result=false;
             }catch(e){
                 String error = e.toString().replaceAll("\n"," ");
                 print("Test ${t.name} failed with error: $error", RED);
@@ -88,7 +85,7 @@ const String GREEN = "green";
 const String RED = "red";
 const String BLUE = "blue";
 
-Function print = (String str, [String type=PLAIN]){
+Function yesprint = (String str, [String type=PLAIN]){
     if(type==PLAIN||Platform.isWindows){
         stdout.writeln(str);
     }else if(type==RED){
@@ -96,6 +93,10 @@ Function print = (String str, [String type=PLAIN]){
     }else if(type==GREEN){
         stdout.writeln("\u001b[0;32m"+str+"\u001b[0;0m");
     }else if(type==BLUE){
-        stdout.writeln("\u001b[0;34m"+str+"\u001b[0;0m");
+        stdout.writeln("\u001b[0;36m"+str+"\u001b[0;0m");
     }
 };
+
+Function print = yesprint;
+
+Function noprint = (String str){};

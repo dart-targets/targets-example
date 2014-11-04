@@ -10,8 +10,11 @@
 // Test results based on this file are not shared with your instructor,
 // so changing it will not help your grade. If this file becomes corrupted,
 // you will have to redownload the assigment template.
+/// 
+/// This imports the Target classes (ScoredTarget and TestTarget)
+import 'helpers.dart';
 
-/// Import necessary files here, probably with a prefix, e.g.
+/// Import necessary files to tests here, probably with a prefix, e.g.
 import '../example.dart' as Example;
 /// Use ../ as actual assignment code should be in the parent directory
 
@@ -67,28 +70,4 @@ List<Target> getTargets(){
     List<Target> targets = [];
     // Add your targets here
     return targets;
-}
-
-/// Don't modify code beyond this line
-/// The grader relies on these implementations
-/// of ScoredTarget and TestTarget to run tests
-abstract class Target{
-    Function test;
-    String name;
-    String error;
-}
-
-class TestTarget extends Target{
-    Function test = ()=>false;
-    String name;
-
-    TestTarget(this.name);
-}
-
-class ScoredTarget extends Target{
-    Function test = ()=>0;
-    String name;
-    num points;
-
-    ScoredTarget(this.name, this.points);
 }
