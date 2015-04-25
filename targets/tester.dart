@@ -29,7 +29,7 @@ void runTests(){
     bool allPassed = true;
     for(Target t in targets){
         if(t is ScoredTarget){
-            maxPoints += t.points;
+            if(!t.uncounted) maxPoints += t.points;
             var s = 0;
             try{
                 s = t.test();
@@ -62,11 +62,21 @@ void runTests(){
             if(t.error!=null){
                 extra = "- ${t.error}";
             }
-            if(result){
-                print("${t.name}: Passed $extra");
-            }else{
-                print("${t.name}: Failed $extra");
-                allPassed = false;
+            if (t.points <= 0) {
+                if(result){
+                    print("${t.name}: Passed $extra");
+                }else{
+                    print("${t.name}: Failed $extra");
+                    if(!t.uncounted) allPassed = false;
+                }
+            } else {
+                if(!t.uncounted) maxPoints += t.points;
+                if(result){
+                    score += t.points;
+                    print("${t.name}: Passed (${t.points} points) $extra");
+                } else {
+                    print("${t.name}: Failed (${t.points} points) $extra");
+                }
             }
         }
     }
@@ -75,8 +85,8 @@ void runTests(){
         else print("Total Score: $score/$maxPoints", RED);
         if(!allPassed) print("Some Additional Tests Failed", RED);
     }else{
-        if(allPassed) print("All Tests Passed!", GREEN);
-        else print("Some Tests Failed", RED);
+        if(allPassed) print("All Required Tests Passed!", GREEN);
+        else print("Some Required Tests Failed", RED);
     }
 }
 
@@ -85,7 +95,7 @@ const String GREEN = "green";
 const String RED = "red";
 const String BLUE = "blue";
 
-Function yesprint = (String str, [String type=PLAIN]){
+Function print = (String str, [String type=PLAIN]){
     if(type==PLAIN||Platform.isWindows){
         stdout.writeln(str);
     }else if(type==RED){
@@ -96,7 +106,3 @@ Function yesprint = (String str, [String type=PLAIN]){
         stdout.writeln("\u001b[0;36m"+str+"\u001b[0;0m");
     }
 };
-
-Function print = yesprint;
-
-Function noprint = (String str){};

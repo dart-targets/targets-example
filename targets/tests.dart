@@ -66,8 +66,26 @@ final List<String> files = ["example.dart"];
 /// Students will be able to read this file, so don't include
 /// completed implementations as part of your tests. You can
 /// use a different tests.dart for tests you run on submissions.
-List<Target> getTargets(){
-    List<Target> targets = [];
-    // Add your targets here
-    return targets;
+List<Target> getTargets() {
+    var fib = new ScoredTarget("Fibonacci", 3);
+    fib.test = testFib;
+    var fact = new ScoredTarget("Factorial", 3);
+    fact.test = testFact;
+    return [fib, fact];
+}
+
+int testFib() {
+    int i = 0;
+    if (Example.fib(5) == 5) i++;
+    if (Example.fib(10) == 55) i++;
+    if (Example.fib(40) == 102334155) i++;
+    return i;
+}
+
+int testFact() {
+    int i = 0;
+    if (Example.fact(5) == 120) i++;
+    if (Example.fact(10) == 3628800) i++;
+    if (Example.fact(0) == 1) i++;
+    return i;
 }
